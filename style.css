@@ -35,7 +35,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 300px;
+  padding: 100px;
   flex-direction: column;
   gap: 3rem;
 }
@@ -128,4 +128,28 @@ body {
 .error {
   font-size: 1.5rem;
   display: none;
+}
+
+@media (max-width: 800px) {
+  .container {
+    padding: 5rem;
+    gap: 1rem;
+  }
+  .main-title {
+    font-size: 3rem;
+  }
+  .info-box p {
+    font-size: 2rem;
+  }
+  .weather-container {
+    padding: 2rem;
+  }
+}
+@media (max-width: 580px) {
+  .container {
+    padding: 2rem;
+  }
+  .main-title {
+    font-size: 2rem;
+  }
 }/*# sourceMappingURL=style.css.map */
