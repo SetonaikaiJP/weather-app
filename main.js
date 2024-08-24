@@ -36,9 +36,25 @@ weatherHumidity.textContent = '60%'
 input.placeholder = 'Enter City'
 input.maxLength = 20
 
-infoBox.append(
-  weatherTemp,
+const weatherTempDiv = getElement('div', 'weather-temp-div')
+const weatherHumidityDiv = getElement('div', 'weather-humidity-div')
+const weatherTempImg = getElement('i', 'weather-temp-img')
+const weatherHumidityImg = getElement('i', 'weather-humidity-img')
+
+weatherTempImg.classList.add('wi', 'wi-thermometer')
+
+weatherTempDiv.append(
+  weatherTempImg,
+  weatherTemp
+)
+
+weatherHumidityDiv.append(
   weatherHumidity
+)
+
+infoBox.append(
+  weatherTempDiv,
+  weatherHumidityDiv
 )
 
 weatherContainer.append(
@@ -98,6 +114,12 @@ async function checkWeather(city) {
       weatherIcon.classList.add('wi','wi-horizon-alt')
     } break
   }
+  
+  if (data.main.temp > 0) {
+    weatherTempImg.classList.add('wi-thermometer')
+  } else if (data.main.temp <= 0) {
+    weatherTempImg.classList.add('wi-thermometer-exterior')
+  }
 }
 
 btn.addEventListener('click', () => {
@@ -107,15 +129,6 @@ btn.addEventListener('click', () => {
 
 input.addEventListener('keypress', (e) => {
 
-  if (e.key === 'Enter') {
-    checkWeather(input.value)
-
-    btn.click()
-  }
-})
-
-btn.addEventListener('keypress', (e) => {
-  
   if (e.key === 'Enter') {
     checkWeather(input.value)
 

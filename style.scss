@@ -96,8 +96,22 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    & i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
   & p {
     font-size: 3rem;
     font-family: $font-secondary;
@@ -128,7 +142,7 @@ body {
   font-size: 1rem;
   padding: 0.3rem 0.5rem;
 
-  transition: all .3s linear;
+  transition: all 0.3s linear;
   &:hover {
     background-color: #fff59d;
   }
@@ -138,14 +152,13 @@ body {
 }
 
 .error {
-    font-size: 1.5rem;
-    display: none;
+  font-size: 1.5rem;
+  display: none;
 }
 
 // ----------------------------------------------------
 
 @media (max-width: 800px) {
-
   .container {
     padding: 5rem;
     gap: 1rem;
@@ -162,11 +175,9 @@ body {
   .weather-container {
     padding: 2rem;
   }
-  
 }
 
-@media  (max-width: 580px) {
-
+@media (max-width: 580px) {
   .container {
     padding: 2rem;
   }
@@ -174,5 +185,4 @@ body {
   .main-title {
     font-size: 2rem;
   }
-  
 }
