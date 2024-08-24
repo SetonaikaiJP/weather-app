@@ -105,4 +105,22 @@ btn.addEventListener('click', () => {
   checkWeather(input.value)
 })
 
+input.addEventListener('keypress', (e) => {
+
+  if (e.key === 'Enter') {
+    checkWeather(input.value)
+
+    btn.click()
+  }
+})
+
+btn.addEventListener('keypress', (e) => {
+  
+  if (e.key === 'Enter') {
+    checkWeather(input.value)
+
+    btn.click()
+  }
+})
+
 app.append(container)
