@@ -12,6 +12,9 @@ const container = getElement('div', 'container')
 const mainTitle = getElement('h1','main-title')
 mainTitle.textContent = 'Weather App'
 
+const themeSwtitchBtn = getElement('button', 'theme-swtich-btn')
+themeSwtitchBtn.textContent = 'Dark Mode'
+
 const link = getElement('button','link')
 link.textContent = 'Tap'
 
@@ -23,8 +26,8 @@ const weatherTemp = getElement('p','weather-temp')
 const weatherHumidity = getElement('p','weather-humidity')
 const infoBox = getElement('div','info-box')
 const input = getElement('input', 'input')
+
 const errorLabel = getElement('p','error')
-errorLabel.textContent = 'City not found'
 const btn = getElement('button', 'btn')
 btn.textContent = 'Search'
 input.type = 'text'
@@ -68,6 +71,7 @@ weatherContainer.append(
 
 container.append(
   mainTitle,
+  themeSwtitchBtn,
   weatherContainer
 )
 
@@ -81,6 +85,14 @@ async function checkWeather(city) {
 
   if (response.status === 404) {
     errorLabel.style.display = 'block'
+    errorLabel.textContent = 'City not found'
+  } else if (response.status === 200) {
+    errorLabel.style.display = 'none'
+  }
+
+  if (input.value === '') {
+    errorLabel.style.display = 'block'
+    errorLabel.textContent = 'Enter a city'
   }
 
   var data = await response.json()
@@ -121,6 +133,23 @@ async function checkWeather(city) {
     weatherTempImg.classList.add('wi-thermometer-exterior')
   }
 }
+
+let themeState = 'light'
+themeSwtitchBtn.addEventListener('click', () => {
+  if (themeState === 'light') {
+    themeState = 'dark'
+    themeSwtitchBtn.textContent = 'Light Mode'
+    container.style.backgroundColor = 'rgba(0, 0, 0, 0.904)'
+    mainTitle.style.color = 'white'
+    weatherContainer.classList.add('dark-container')
+  } else if (themeState === 'dark') {
+    themeState = 'light'
+    themeSwtitchBtn.textContent = 'Dark Mode'
+    container.style.backgroundColor = 'rgba(145, 140, 180, 0.904)'
+    mainTitle.style.color = 'black'
+    weatherContainer.classList.remove('dark-container')
+  }
+})
 
 btn.addEventListener('click', () => {
   input.innerHTML = ``
