@@ -20,6 +20,13 @@ link.textContent = 'Tap'
 
 const weatherContainer = getElement('div', 'weather-container')
 
+const tableContainer = getElement('div', 'table-container')
+
+
+const table = getElement('ul', 'table')
+const tableItem = getElement('li', 'table-item')
+tableItem.textContent = 'Table Item'
+
 const cityName = getElement('h2', 'city-name')
 const weatherIcon = getElement('i', 'weather-icon')
 const weatherTemp = getElement('p','weather-temp')
@@ -69,10 +76,25 @@ weatherContainer.append(
   btn
 )
 
+tableContainer.append(
+  table
+)
+
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+
+table.append(
+  ...days.map((day) => {
+    const tableItem = getElement('li', 'table-item')
+    tableItem.textContent = day
+    return tableItem
+  })
+)
+
 container.append(
   mainTitle,
   themeSwtitchBtn,
-  weatherContainer
+  weatherContainer,
+  tableContainer
 )
 
 // ------------------------------------------------------------------------

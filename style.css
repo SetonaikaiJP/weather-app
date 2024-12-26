@@ -82,6 +82,44 @@ body {
   color: white;
 }
 
+.table-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(38deg, rgb(95, 93, 133) 0%, rgb(230, 204, 92) 50%, rgb(247, 129, 99) 91%);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.table .table-item {
+  border: 1px solid #4d4d4d;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100px;
+  background-color: #fff;
+  transition: all 0.3s linear;
+}
+.table .table-item:hover {
+  background-color: #fff8b7;
+}
+
 .city-name {
   font-size: 2rem;
   letter-spacing: 0.3rem;
