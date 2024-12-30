@@ -30,6 +30,12 @@ body {
   font-family: "Mooli", serif;
 }
 
+#app {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(145, 140, 180, 0.904);
+}
+
 .container {
   background-color: rgba(145, 140, 180, 0.904);
   display: flex;
@@ -38,7 +44,6 @@ body {
   padding: 30px;
   flex-direction: column;
   gap: 3rem;
-  height: 100vh;
   width: 100%;
 }
 .container [data-theme=light] {
@@ -117,12 +122,18 @@ body {
   justify-content: center;
   gap: 10px;
   width: 100%;
-  min-height: 120px;
+  min-height: 200px;
   background-color: #fff;
   transition: all 0.3s linear;
 }
 .table-item:hover {
   background-color: #fff8b7;
+}
+.table-item p {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Oswald", serif;
+  color: #4d4d4d;
 }
 
 .city-name {
@@ -244,15 +255,57 @@ body {
   .weather-container {
     padding: 2rem;
   }
+  .table-item {
+    min-height: auto;
+  }
+}
+@media (max-width: 630px) {
+  .table-item {
+    min-height: 100px;
+  }
+  .table-item p {
+    font-size: 0.8rem;
+  }
 }
 @media (max-width: 580px) {
   .container {
     padding: 2rem;
+  }
+  .table-container {
+    padding: 15px;
   }
   .main-title {
     font-size: 2rem;
   }
   .weather-temp-div {
     gap: 5px;
+  }
+}
+@media (max-width: 450px) {
+  .container {
+    padding: 1rem;
+  }
+  .table-container {
+    padding: 10px;
+  }
+  .table-item {
+    min-height: 80px;
+  }
+  .table-item p {
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 360px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .table-container {
+    padding: 5px;
+  }
+  .table-item {
+    min-height: 60px;
+  }
+  .table-item p {
+    font-size: 0.5rem;
   }
 }/*# sourceMappingURL=style.css.map */

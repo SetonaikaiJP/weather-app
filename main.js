@@ -112,7 +112,7 @@ async function checkWeather(city) {
   console.log(data)
 
   // Current Weather
-  cityName.textContent = data.address.charAt(0).toUpperCase() + data.address.slice(1)
+  cityName.textContent = `${data.address.charAt(0).toUpperCase()}${data.address.slice(1)}`
   weatherTemp.textContent = `${Math.ceil(data.currentConditions.temp)}°C`
   weatherHumidity.textContent = `${Math.ceil(data.currentConditions.humidity)}%`
   
@@ -124,8 +124,8 @@ async function checkWeather(city) {
     const tableItemHumidity = getElement('p', 'table-item-humidity')
     
     tableItemText.textContent = title
-    tableItemTemp.textContent = temp
-    tableItemHumidity.textContent = humidity
+    tableItemTemp.textContent = `${temp} °C`
+    tableItemHumidity.textContent = `${humidity} %`
     
     tableItem.append(
       tableItemText,
