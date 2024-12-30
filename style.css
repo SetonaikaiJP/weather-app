@@ -35,10 +35,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px;
+  padding: 30px;
   flex-direction: column;
   gap: 3rem;
   height: 100vh;
+  width: 100%;
 }
 .container [data-theme=light] {
   background-color: rgba(134, 133, 139, 0.904);
@@ -84,26 +85,29 @@ body {
 
 .table-container {
   max-width: 500px;
+  max-height: 1000px;
   width: 100%;
+  height: 100%;
   padding: 30px;
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background: linear-gradient(38deg, rgb(95, 93, 133) 0%, rgb(230, 204, 92) 50%, rgb(247, 129, 99) 91%);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  display: none;
 }
 
 .table {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
-.table .table-item {
+.table-item {
   border: 1px solid #4d4d4d;
   border-radius: 10px;
   padding: 10px;
@@ -112,11 +116,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  width: 100px;
+  width: 100%;
+  min-height: 120px;
   background-color: #fff;
   transition: all 0.3s linear;
 }
-.table .table-item:hover {
+.table-item:hover {
   background-color: #fff8b7;
 }
 

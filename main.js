@@ -22,10 +22,7 @@ const weatherContainer = getElement('div', 'weather-container')
 
 const tableContainer = getElement('div', 'table-container')
 
-
 const table = getElement('ul', 'table')
-const tableItem = getElement('li', 'table-item')
-tableItem.textContent = 'Table Item'
 
 const cityName = getElement('h2', 'city-name')
 const weatherIcon = getElement('i', 'weather-icon')
@@ -80,16 +77,6 @@ tableContainer.append(
   table
 )
 
-const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-
-table.append(
-  ...days.map((day) => {
-    const tableItem = getElement('li', 'table-item')
-    tableItem.textContent = day
-    return tableItem
-  })
-)
-
 container.append(
   mainTitle,
   themeSwtitchBtn,
@@ -99,11 +86,12 @@ container.append(
 
 // ------------------------------------------------------------------------
 
-const apiKey = '2e37d33f36113619f7f1c23c2b99a0a6'
-const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q='
+// city?unitGroup=metric&key=AT8BM3QEXYAMZH68R7E36LYTD&contentType=json
+const apiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
+const apiKey = 'AT8BM3QEXYAMZH68R7E36LYTD'
 
 async function checkWeather(city) {
-  const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
+  const response = await fetch(`${apiUrl}${city}?unitGroup=metric&key=${apiKey}&contentType=json`)
 
   if (response.status === 404) {
     errorLabel.style.display = 'block'
@@ -117,41 +105,60 @@ async function checkWeather(city) {
     errorLabel.textContent = 'Enter a city'
   }
 
+  table.innerHTML = ''
+
   var data = await response.json()
 
   console.log(data)
 
-  cityName.textContent = data.name
-  weatherTemp.textContent = `${Math.floor(data.main.temp)}°C`
-  weatherHumidity.textContent = `${data.main.humidity}%`
-
-  switch (data.weather[0].main) {
-    case 'Clear': {
-      weatherIcon.classList.add('wi','wi-day-sunny')
-    } break
-    case 'Clouds': {
-      weatherIcon.classList.add('wi','wi-day-cloudy')
-    } break
-    case 'Rain': {
-      weatherIcon.classList.add('wi','wi-day-rain')
-    } break
-    case 'Fog': {
-      weatherIcon.classList.add('wi','wi-day-fog')
-    } break
-    case 'Snow': {
-      weatherIcon.classList.add('wi','wi-day-snow')
-    } break
-    case 'Thunderstorm': {
-      weatherIcon.classList.add('wi','wi-day-thunderstorm')
-    } break
-    default: {
-      weatherIcon.classList.add('wi','wi-horizon-alt')
-    } break
+  // Current Weather
+  cityName.textContent = data.address.charAt(0).toUpperCase() + data.address.slice(1)
+  weatherTemp.textContent = `${Math.ceil(data.currentConditions.temp)}°C`
+  weatherHumidity.textContent = `${Math.ceil(data.currentConditions.humidity)}%`
+  
+  // Next three Days Weather
+  function getTableItem(title, temp, humidity) {
+    const tableItem = getElement('li', 'table-item')
+    const tableItemText = getElement('p', 'table-item-text')
+    const tableItemTemp = getElement('p', 'table-item-temp')
+    const tableItemHumidity = getElement('p', 'table-item-humidity')
+    
+    tableItemText.textContent = title
+    tableItemTemp.textContent = temp
+    tableItemHumidity.textContent = humidity
+    
+    tableItem.append(
+      tableItemText,
+      tableItemTemp,
+      tableItemHumidity
+    )
+  
+    return tableItem
   }
   
-  if (data.main.temp > 0) {
+  const Days = ['today', 'tomorrow', 'in three days']
+  
+  for (let i=0; i<Days.length; i++) {
+    const tableItem = getTableItem(
+      Days[i],
+      data.days[i].temp,
+      data.days[i].humidity
+    )
+    table.append(tableItem)
+  }
+
+  tableContainer.style.display = 'flex'
+  
+  // Weather Icon rendering
+
+  if (data.currentConditions.snow > 0) {
+    weatherIcon.classList.remove('wi-day-sunny')
+    weatherIcon.classList.add('wi-snow')
+  }
+  
+  if (data.currentConditions.temp > 0) {
     weatherTempImg.classList.add('wi-thermometer')
-  } else if (data.main.temp <= 0) {
+  } else if (data.currentConditions.temp <= 0) {
     weatherTempImg.classList.add('wi-thermometer-exterior')
   }
 }
@@ -183,7 +190,7 @@ input.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     checkWeather(input.value)
 
-    btn.click()
+    themeSwtitchBtn.click()
   }
 })
 
