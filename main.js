@@ -50,6 +50,11 @@ const weatherHumidityImg = getElement('i', 'weather-humidity-img')
 
 weatherTempImg.classList.add('wi', 'wi-thermometer')
 
+const tableMode = getElement('div', 'table-mode')
+
+const tableModeBtn = getElement('button', 'table-mode-btn')
+tableModeBtn.textContent = 'Switch Mode'
+
 weatherTempDiv.append(
   weatherTempImg,
   weatherTemp
@@ -74,6 +79,8 @@ weatherContainer.append(
 )
 
 tableContainer.append(
+  tableMode,
+  tableModeBtn,
   table
 )
 
@@ -89,6 +96,21 @@ container.append(
 // city?unitGroup=metric&key=AT8BM3QEXYAMZH68R7E36LYTD&contentType=json
 const apiUrl = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
 const apiKey = 'AT8BM3QEXYAMZH68R7E36LYTD'
+
+const TableModeStates = ['3 days', 'week']
+let tableModeState = '3 days'
+
+tableModeBtn.onclick = () => {
+  if (tableModeState === '3 days') {
+    tableModeState = 'week'
+    tableMode.textContent = 'Week Forecast'
+  } else if (tableModeState === 'week') {
+    tableModeState = '3 days'
+    tableMode.textContent = '3 Day Forecast'
+  }
+  table.innerHTML = ''
+  checkWeather(input.value)
+}
 
 async function checkWeather(city) {
   const response = await fetch(`${apiUrl}${city}?unitGroup=metric&key=${apiKey}&contentType=json`)
@@ -135,19 +157,39 @@ async function checkWeather(city) {
   
     return tableItem
   }
-  
-  const Days = ['today', 'tomorrow', 'in three days']
-  
-  for (let i=0; i<Days.length; i++) {
-    const tableItem = getTableItem(
-      Days[i],
-      data.days[i].temp,
-      data.days[i].humidity
-    )
-    table.append(tableItem)
-  }
 
-  tableContainer.style.display = 'flex'
+  
+
+  const ThreeDays = ['Today', 'Tomorrow', 'in three days']
+  const Week = ['Today', 'Tomorrow', 'in 3 days', 'in 4 days', 'in 5 days', 'in 6 days', 'in 7 days']
+
+  
+
+  if (tableModeState === '3 days') {
+    for (let i=0; i<ThreeDays.length; i++) {
+      const tableItem = getTableItem(
+        ThreeDays[i],
+        data.days[i].temp,
+        data.days[i].humidity
+      )
+      table.append(tableItem)
+    }
+  
+    tableContainer.style.display = 'flex'
+  } else if (tableModeState === 'week') {
+    for (let i=0; i<Week.length; i++) {
+      const tableItem = getTableItem(
+        Week[i],
+        data.days[i].temp,
+        data.days[i].humidity
+      )
+      table.append(tableItem)
+    }
+  
+    tableContainer.style.display = 'flex'
+  } else {
+    tableContainerContainer.style.display = 'none'
+  }
   
   // Weather Icon rendering
 

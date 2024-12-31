@@ -110,7 +110,7 @@ body {
   width: 100%;
   height: 100%;
   padding: 30px;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(38deg, rgb(95, 93, 133) 0%, rgb(230, 204, 92) 50%, rgb(247, 129, 99) 91%);
@@ -120,15 +120,21 @@ body {
 }
 
 .table {
+  max-width: 500px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: 10px;
+  scrollbar-color: #7a9dfc;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 10px;
   &-item {
     border: 1px solid #4d4d4d;
+    min-width: 100px;
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -154,6 +160,26 @@ body {
   }
 }
 
+.table-mode-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #000;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: $fonrt-third;
+
+  transition: all .3s linear;
+  &:hover {
+    background-color: #fff8b7;
+  }
+}
+
 .city-name {
   font-size: 2rem;
   letter-spacing: 0.3rem;
@@ -174,6 +200,7 @@ body {
     color: #fff172;
   }
 }
+
 
 .info-box {
   width: 100%;
@@ -329,6 +356,7 @@ body {
 
   .table-item{
     min-height: 80px;
+    min-width: 80px;
     & p {
       font-size: .5rem;
     }
