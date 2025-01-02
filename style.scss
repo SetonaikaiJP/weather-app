@@ -121,7 +121,6 @@ body {
 
 .table {
   max-width: 500px;
-  overflow: scroll;
   scroll-behavior: smooth;
   scrollbar-width: 10px;
   scrollbar-color: #7a9dfc;
@@ -158,6 +157,18 @@ body {
       color: #4d4d4d;
     }
   }
+}
+
+.table-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  font-weight: 400;
+  font-family: $fonrt-third;
+  border-radius: 20px;
 }
 
 .table-mode-btn {

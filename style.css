@@ -105,7 +105,6 @@ body {
 
 .table {
   max-width: 500px;
-  overflow: scroll;
   scroll-behavior: smooth;
   scrollbar-width: 10px;
   scrollbar-color: #7a9dfc;
@@ -140,6 +139,18 @@ body {
   font-weight: 600;
   font-family: "Oswald", serif;
   color: #4d4d4d;
+}
+
+.table-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  font-weight: 400;
+  font-family: "Oswald", serif;
+  border-radius: 20px;
 }
 
 .table-mode-btn {

@@ -99,12 +99,15 @@ const apiKey = 'AT8BM3QEXYAMZH68R7E36LYTD'
 
 const TableModeStates = ['3 days', 'week']
 let tableModeState = '3 days'
+tableMode.style.display = 'none'
 
 tableModeBtn.onclick = () => {
   if (tableModeState === '3 days') {
+    tableMode.style.display = 'flex'
     tableModeState = 'week'
     tableMode.textContent = 'Week Forecast'
   } else if (tableModeState === 'week') {
+    tableMode.style.display = 'flex'
     tableModeState = '3 days'
     tableMode.textContent = '3 Day Forecast'
   }
@@ -158,14 +161,13 @@ async function checkWeather(city) {
     return tableItem
   }
 
-  
+  // Table Mode Rendering
 
   const ThreeDays = ['Today', 'Tomorrow', 'in three days']
   const Week = ['Today', 'Tomorrow', 'in 3 days', 'in 4 days', 'in 5 days', 'in 6 days', 'in 7 days']
 
-  
-
   if (tableModeState === '3 days') {
+    table.style.overflow = 'hidden'
     for (let i=0; i<ThreeDays.length; i++) {
       const tableItem = getTableItem(
         ThreeDays[i],
@@ -177,6 +179,8 @@ async function checkWeather(city) {
   
     tableContainer.style.display = 'flex'
   } else if (tableModeState === 'week') {
+    table.style.overflowY = 'hidden'
+    table.style.overflowX = 'scroll'
     for (let i=0; i<Week.length; i++) {
       const tableItem = getTableItem(
         Week[i],
